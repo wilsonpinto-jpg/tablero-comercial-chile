@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablero de Control Comercial · Estrategia Chile</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .metric-card { transition: all 0.2s ease-in-out; }
+    .metric-card:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body class="h-full text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Navigation / Top Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-slate-900 leading-tight">Estrategia Comercial Chile 2026</h1>
+            <p class="text-xs text-slate-500">Servinformación B2B · Monitoreo de Prospección y Pilotos</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            <span class="w-2 h-2 mr-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+            Meta: 18 de Diciembre (24 días restantes)
+          </span>
+          <a href="https://docs.google.com/spreadsheets/d/1N5GcR1C6sbYsK94FB8h1TTUBI45QSUn8bJ7qTQx5ZDE/edit" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors border border-slate-300">
+            <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-600"></i>
+            <span>Ver Base Google Sheets</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Hero / Scorecard General -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-blue-50 text-brand-700 border border-blue-200">
+              Scorecard de Rendimiento
+            </span>
+            <span class="text-xs text-slate-400">Actualizado a Noviembre 2026</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 mt-2">Estado General de la Estrategia</h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+            Evaluación del avance comercial para posicionar la suite logística en transportistas, operadores y terminales chilenos.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center min-w-[120px]">
+            <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Calificación</p>
+            <p class="text-2xl font-extrabold text-brand-600 mt-0.5">74 <span class="text-sm font-semibold text-slate-500">/ 100</span></p>
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">Grado B+</span>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center min-w-[120px]">
+            <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Pilotos</p>
+            <p class="text-2xl font-extrabold text-emerald-600 mt-0.5">1 <span class="text-sm font-semibold text-slate-500">/ 5</span></p>
+            <span class="text-[10px] font-medium text-slate-600">20% de la meta</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Metric Cards with Concrete Explanations -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        
+        <!-- Card 1 -->
+        <div class="metric-card bg-slate-50/70 rounded-xl p-4 border border-slate-200/80">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Cuentas Perfiladas</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-100 text-brand-700 flex items-center justify-center">
+              <i data-lucide="building-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 mt-2">89 Cuentas</p>
+          <div class="mt-2 pt-2 border-t border-slate-200/60">
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong class="text-slate-800">¿Qué significa?</strong> Base completa con decisores reales (Gerentes Generales y de Operaciones). 44 asignadas a Sofía y 45 a Majo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="metric-card bg-slate-50/70 rounded-xl p-4 border border-slate-200/80">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Tiempo Ganado</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+              <i data-lucide="zap" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <p class="text-2xl font-bold text-emerald-600 mt-2">+7 Días Hábiles</p>
+          <div class="mt-2 pt-2 border-t border-slate-200/60">
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong class="text-slate-800">¿Qué significa?</strong> En lugar de esperar pasivamente que buscaran teléfonos, se inició el contacto por LinkedIn el Día 1 en paralelo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="metric-card bg-slate-50/70 rounded-xl p-4 border border-slate-200/80">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Calidad de Contacto</span>
+            <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center">
+              <i data-lucide="phone-call" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 mt-2">81% Teléfonos</p>
+          <div class="mt-2 pt-2 border-t border-slate-200/60">
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong class="text-slate-800">¿Qué significa?</strong> 72 de 89 cuentas tienen celular/teléfono directo y 94% están conectadas en HubSpot con su enlace único.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="metric-card bg-slate-50/70 rounded-xl p-4 border border-slate-200/80">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Reuniones Confirmadas</span>
+            <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center">
+              <i data-lucide="calendar-check" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <p class="text-2xl font-bold text-purple-700 mt-2">1 Confirmada</p>
+          <div class="mt-2 pt-2 border-t border-slate-200/60">
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong class="text-slate-800">¿Qué significa?</strong> Primera reunión comercial cerrada con <strong class="text-slate-900">AGUNSA (Pedro Buroz)</strong>. Faltan 4 pilotos para la meta del 18-Dic.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Comparative Section: Traditional vs Parallel Agile Model -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+      <div class="max-w-3xl">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          Eficiencia en Tiempos Comerciales
+        </span>
+        <h3 class="text-xl font-bold text-slate-900 mt-2">El Impacto de Iniciar el Contacto en Paralelo</h3>
+        <p class="text-sm text-slate-600 mt-1">
+          Normalmente una base se entrega a un equipo de prospección para buscar correos o números y el proceso tarda una semana en frío. Así se optimizó el ciclo comercial en Chile:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <!-- Traditional Flow -->
+        <div class="p-5 rounded-xl border border-rose-200 bg-rose-50/40">
+          <div class="flex items-center justify-between pb-3 border-b border-rose-200/60">
+            <div class="flex items-center space-x-2">
+              <div class="w-7 h-7 rounded-full bg-rose-200 text-rose-800 flex items-center justify-center text-xs font-bold">✕</div>
+              <h4 class="font-bold text-rose-900 text-sm">Modelo Tradicional (Pérdida de 7 Días)</h4>
+            </div>
+            <span class="text-xs font-semibold text-rose-700">Inercia Comercial</span>
+          </div>
+          <ul class="mt-4 space-y-3 text-xs text-slate-700">
+            <li class="flex items-start space-x-2">
+              <span class="font-bold text-rose-700">Día 1 al 7:</span>
+              <span>El equipo de ventas queda detenido mientras un área de apoyo busca teléfonos y correos.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="font-bold text-rose-700">Día 8:</span>
+              <span>Primer contacto por correo masivo que suele terminar en la bandeja de spam.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="font-bold text-rose-700">Resultado:</span>
+              <span>Ciclo de ventas extendido en 1 a 2 semanas innecesariamente antes de hablar con el cliente.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Parallel Agile Flow -->
+        <div class="p-5 rounded-xl border border-emerald-200 bg-emerald-50/40">
+          <div class="flex items-center justify-between pb-3 border-b border-emerald-200/60">
+            <div class="flex items-center space-x-2">
+              <div class="w-7 h-7 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center text-xs font-bold">✓</div>
+              <h4 class="font-bold text-emerald-900 text-sm">Modelo Aplicado (Toque Simultáneo Día 1)</h4>
+            </div>
+            <span class="text-xs font-semibold text-emerald-700">+7 Días Ganados</span>
+          </div>
+          <ul class="mt-4 space-y-3 text-xs text-slate-700">
+            <li class="flex items-start space-x-2">
+              <span class="font-bold text-emerald-700">Día 1:</span>
+              <span>Primer mensaje directo por LinkedIn Sales Navigator a los Gerentes de Operaciones sin esperar.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="font-bold text-emerald-700">Día 2 al 4:</span>
+              <span>En paralelo se completan números de celular y correos en HubSpot para activar llamadas.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="font-bold text-emerald-700">Resultado:</span>
+              <span>Primer SQL agendado (AGUNSA) en tiempo récord y base completamente calificada.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- Chart 1: Funnel de Prospección -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base">Estado Actual de las 89 Cuentas</h3>
+            <span class="text-xs text-slate-400 font-medium">Embudo Comercial</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Distribución viva de prospectos según su fase de contacto.</p>
+          <div class="mt-4 h-64 flex items-center justify-center">
+            <canvas id="funnelChart"></canvas>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-slate-300"></span>
+            <span class="text-slate-600">Por contactar: <strong class="text-slate-900">82 cuentas (92%)</strong></span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+            <span class="text-slate-600">En secuencia: <strong class="text-slate-900">4 cuentas (4%)</strong></span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="text-slate-600">No contesta: <strong class="text-slate-900">2 cuentas (2%)</strong></span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="text-slate-600">Reunión agendada: <strong class="text-emerald-700">1 cuenta (1%)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 2: Canales Disponibles -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base">Cobertura de Canales de Contacto</h3>
+            <span class="text-xs text-slate-400 font-medium">Calidad de Datos</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Porcentaje de cuentas que cuentan con datos listos para operar.</p>
+          <div class="mt-4 h-64 flex items-center justify-center">
+            <canvas id="channelsChart"></canvas>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600">
+          <p><strong class="text-slate-800">Conclusión:</strong> La base tiene un 98% de cobertura en LinkedIn y 81% de teléfonos, lo que permite contactar por múltiples vías sin depender de un solo canal.</p>
+        </div>
+      </div>
+
+      <!-- Chart 3: Distribución por Industria -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base">Segmentación de Cuentas por Industria</h3>
+            <span class="text-xs text-slate-400 font-medium">89 Cuentas Objetivo</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Distribución del mercado objetivo según su actividad logística.</p>
+          <div class="mt-4 h-64 flex items-center justify-center">
+            <canvas id="industryChart"></canvas>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600">
+          <p><strong class="text-slate-800">Foco Principal:</strong> El 51% son Dueños de Carga (Retail, Fruta y Salmón) y el 33% son Transportistas y Forwarders con flotas activas.</p>
+        </div>
+      </div>
+
+      <!-- Chart 4: Balance de Asignación BDR -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base">Balance de Carga y Asignación BDR</h3>
+            <span class="text-xs text-slate-400 font-medium">Sofía vs. Majo</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Distribución operativa entre las dos profesionales comerciales.</p>
+          <div class="mt-4 h-64 flex items-center justify-center">
+            <canvas id="bdrChart"></canvas>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-2 gap-4 text-xs">
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+            <p class="font-bold text-slate-800">Sofía Tula (44 Cuentas)</p>
+            <p class="text-slate-500 mt-0.5">Transportistas Top y Grandes Forwarders. 1 reunión lograda (AGUNSA).</p>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+            <p class="font-bold text-slate-800">Majo Acuña (45 Cuentas)</p>
+            <p class="text-slate-500 mt-0.5">Dueños de Carga, Depósitos y Terminales. Base lista para iniciar cadencia.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Table of Priority Accounts (Tier 1) -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900">Muestra de Cuentas Prioritarias (Tier 1)</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Cuentas con mayor tamaño de flota o volumen de carga en puertos chilenos.</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="text-xs text-slate-500">Filtrar por Responsable:</span>
+          <select id="bdrFilter" onchange="filterTable()" class="text-xs border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500">
+            <option value="ALL">Todas las cuentas</option>
+            <option value="Sofia">Sofía Tula</option>
+            <option value="Majo">Majo Acuña</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto mt-4">
+        <table class="w-full text-left text-xs text-slate-700">
+          <thead class="bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider border-b border-slate-200">
+            <tr>
+              <th class="py-3 px-4">Empresa</th>
+              <th class="py-3 px-4">Segmento</th>
+              <th class="py-3 px-4">Decisor Clave</th>
+              <th class="py-3 px-4">Cargo</th>
+              <th class="py-3 px-4">Responsable</th>
+              <th class="py-3 px-4 text-center">Estado Actual</th>
+            </tr>
+          </thead>
+          <tbody id="accountsTableBody" class="divide-y divide-slate-100 font-normal">
+            
+            <!-- Row 1: AGUNSA -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">AGUNSA</td>
+              <td class="py-3 px-4 text-slate-600">Operador Logístico</td>
+              <td class="py-3 px-4">Pedro Buroz Segnini</td>
+              <td class="py-3 px-4 text-slate-500">Jefe de Operaciones Logísticas</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">
+                  Reunión Agendada
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 2: Sotraser -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">Sotraser S.A.</td>
+              <td class="py-3 px-4 text-slate-600">Transportista Terrestre</td>
+              <td class="py-3 px-4">Alberto Heller / Eric Machuca</td>
+              <td class="py-3 px-4 text-slate-500">Director Ejecutivo / Subg. Flota</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 3: Nazar -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">Transportes Nazar</td>
+              <td class="py-3 px-4 text-slate-600">Transportista Terrestre</td>
+              <td class="py-3 px-4">Miguel Nazar / José Ramos</td>
+              <td class="py-3 px-4 text-slate-500">Socio Director / Jefe Operaciones</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 4: TRAST -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">TRAST</td>
+              <td class="py-3 px-4 text-slate-600">Transportista Terrestre</td>
+              <td class="py-3 px-4">Vicente Ariztía</td>
+              <td class="py-3 px-4 text-slate-500">Gerente General</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 5: Jorquera -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">Jorquera Transporte S.A.</td>
+              <td class="py-3 px-4 text-slate-600">Transportista Terrestre</td>
+              <td class="py-3 px-4">Víctor Jorquera</td>
+              <td class="py-3 px-4 text-slate-500">Director Ejecutivo</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 6: Sitrans -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Majo">
+              <td class="py-3 px-4 font-bold text-slate-900">Sitrans</td>
+              <td class="py-3 px-4 text-slate-600">Depósito Extraportuario</td>
+              <td class="py-3 px-4">Rafael Román / Rodrigo Berner</td>
+              <td class="py-3 px-4 text-slate-500">Gerente de Operaciones / Jefe Op.</td>
+              <td class="py-3 px-4"><span class="font-medium text-purple-700">Majo</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 7: Cencosud -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Majo">
+              <td class="py-3 px-4 font-bold text-slate-900">Cencosud</td>
+              <td class="py-3 px-4 text-slate-600">Dueño de Carga (Retail)</td>
+              <td class="py-3 px-4">Alejandro Silva</td>
+              <td class="py-3 px-4 text-slate-500">Subgerente de Abastecimiento</td>
+              <td class="py-3 px-4"><span class="font-medium text-purple-700">Majo</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 8: San Antonio Terminal Internacional -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Majo">
+              <td class="py-3 px-4 font-bold text-slate-900">STI (San Antonio Terminal)</td>
+              <td class="py-3 px-4 text-slate-600">Terminal Portuario</td>
+              <td class="py-3 px-4">Werner Guzmán</td>
+              <td class="py-3 px-4 text-slate-500">Gerente de Operaciones</td>
+              <td class="py-3 px-4"><span class="font-medium text-purple-700">Majo</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 9: Camanchaca -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">Camanchaca SA</td>
+              <td class="py-3 px-4 text-slate-600">Exportador (Salmón Reefer)</td>
+              <td class="py-3 px-4">Mario Aguilera</td>
+              <td class="py-3 px-4 text-slate-500">Gerente Corporativo de Logística</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+            <!-- Row 10: Falabella -->
+            <tr class="hover:bg-slate-50/80 transition-colors" data-bdr="Sofia">
+              <td class="py-3 px-4 font-bold text-slate-900">Grupo Falabella</td>
+              <td class="py-3 px-4 text-slate-600">Dueño de Carga (Retail)</td>
+              <td class="py-3 px-4">Hans-Peter Solsbach</td>
+              <td class="py-3 px-4 text-slate-500">Gerente Op. Logística Internacional</td>
+              <td class="py-3 px-4"><span class="font-medium text-brand-700">Sofía</span></td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700">
+                  Por contactar
+                </span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Executive Commercial Diagnosis Section -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+      <div class="flex items-center space-x-2">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200">
+          Diagnóstico Profesional Comercial
+        </span>
+        <span class="text-xs text-slate-400">Lectura en 60 Segundos</span>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900 mt-2">Conclusiones Clave y Plan de Acción</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        
+        <!-- Pillar 1: Situación Actual -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70">
+          <div class="flex items-center space-x-2 text-brand-700 font-bold text-sm">
+            <i data-lucide="info" class="w-4 h-4"></i>
+            <span>1. La Base está Lista</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+            Se cuenta con una base de 89 cuentas directas con decisores de primer nivel. El 81% tiene celular confirmado y el 98% tiene perfil de LinkedIn verificado. La primera reunión agendada con AGUNSA demuestra que el interés en optimización operativa es real.
+          </p>
+        </div>
+
+        <!-- Pillar 2: Alerta Comercial -->
+        <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-200">
+          <div class="flex items-center space-x-2 text-amber-800 font-bold text-sm">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+            <span>2. Cuello de Botella en Tiempo</span>
+          </div>
+          <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+            El 92% de la base (82 cuentas) aún no ha recibido el primer contacto. Quedan 24 días hábiles antes del 18 de diciembre. Si no se acelera el ritmo diario de llamadas y mensajes, el tiempo consumirá la probabilidad de cerrar los 4 pilotos restantes.
+          </p>
+        </div>
+
+        <!-- Pillar 3: Plan de Acción -->
+        <div class="p-4 rounded-xl bg-emerald-50/50 border border-emerald-200">
+          <div class="flex items-center space-x-2 text-emerald-800 font-bold text-sm">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>3. Meta Diaria de Contacto</span>
+          </div>
+          <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+            Se requiere que Sofía y Majo ejecuten 8 contactos diarios cada una (16 diarios en total). Esto permite barrer todas las cuentas en 5 días y generar entre 6 y 8 reuniones adicionales para asegurar el cierre de los 5 pilotos antes de fin de año.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>Servinformación S.A. · Soluciones Geoespaciales y Logística B2B · Desplegado para Vercel</p>
+      <p class="mt-1 text-slate-400">Datos sincronizados con HubSpot CRM y Google Sheets</p>
+    </div>
+  </footer>
+
+  <!-- Scripts: Icons and Chart Configurations -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Chart 1: Funnel Chart (Doughnut)
+    const ctxFunnel = document.getElementById('funnelChart').getContext('2d');
+    new Chart(ctxFunnel, {
+      type: 'doughnut',
+      data: {
+        labels: ['Por contactar', 'En secuencia activa', 'No contesta / Seguimiento', 'Reunión agendada'],
+        datasets: [{
+          data: [82, 4, 2, 1],
+          backgroundColor: ['#CBD5E1', '#3B82F6', '#F59E0B', '#10B981'],
+          borderWidth: 2,
+          borderColor: '#FFFFFF'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { font: { family: 'Inter', size: 11 }, padding: 12 }
+          }
+        },
+        cutout: '68%'
+      }
+    });
+
+    // Chart 2: Channels Coverage Chart (Horizontal Bar)
+    const ctxChannels = document.getElementById('channelsChart').getContext('2d');
+    new Chart(ctxChannels, {
+      type: 'bar',
+      data: {
+        labels: ['LinkedIn Verificado', 'HubSpot Sincronizado', 'Celular / Teléfono', 'Correo Corporativo'],
+        datasets: [{
+          label: '% de Cobertura en Base',
+          data: [98, 94, 81, 76],
+          backgroundColor: ['#2563EB', '#4F46E5', '#0284C7', '#0D9488'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            max: 100,
+            ticks: { callback: v => v + '%' }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // Chart 3: Industry Segmentation Chart (Bar)
+    const ctxIndustry = document.getElementById('industryChart').getContext('2d');
+    new Chart(ctxIndustry, {
+      type: 'bar',
+      data: {
+        labels: ['Dueños Carga', 'Transportistas', 'Forwarders', 'Terminales', 'Depósitos'],
+        datasets: [{
+          label: 'Cantidad de Cuentas',
+          data: [45, 16, 13, 10, 5],
+          backgroundColor: '#3B82F6',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Chart 4: BDR Balance Chart (Bar)
+    const ctxBDR = document.getElementById('bdrChart').getContext('2d');
+    new Chart(ctxBDR, {
+      type: 'bar',
+      data: {
+        labels: ['Sofía Tula', 'Majo Acuña'],
+        datasets: [
+          {
+            label: 'Cuentas Asignadas',
+            data: [44, 45],
+            backgroundColor: '#60A5FA',
+            borderRadius: 6
+          },
+          {
+            label: 'Reuniones Agendadas',
+            data: [1, 0],
+            backgroundColor: '#10B981',
+            borderRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 11 } } }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Filter Table by BDR
+    function filterTable() {
+      const selected = document.getElementById('bdrFilter').value;
+      const rows = document.querySelectorAll('#accountsTableBody tr');
+      rows.forEach(row => {
+        const bdr = row.getAttribute('data-bdr');
+        if (selected === 'ALL' || bdr === selected) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
